@@ -12,8 +12,6 @@
                 value="jdbc:derby://localhost:1527/ZimbraM"/>
             <property name="openjpa.ConnectionDriverName"
                 value="org.apache.derby.jdbc.ClientDriver"/>
-       		<property name="openjpa.InverseManager"
-				value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

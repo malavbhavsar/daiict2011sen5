@@ -1,161 +1,171 @@
 package com.zimbra.rest.m;
 
-
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.AUTO;
-import static javax.persistence.GenerationType.IDENTITY;
-import static javax.persistence.GenerationType.SEQUENCE;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.zimbra.user.zuser;
 
 @Entity
-public class m implements java.io.Serializable{
+public class m {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@ManyToOne
-	@JoinColumn(name="username")
-	zuser zuserInstance;
-	@Id
-	int id;
-	@Basic
-	String f;
-	@Basic
-	int rev;
-	@Basic
-	String d;
-	@Basic
-	int s;
-	@Basic
-	int l;
-	@Basic
-	int cid;
-	@Basic
-	String su;
-	@Basic
-	String fr;
-	@Basic
-	String dine;
-	@Basic
-	String tine;
-	@Basic
-	String aine;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int gid_m;
+    @Basic
+    private int id;
+    @Basic
+    private String f;
+    @Basic
+    private int rev;
+    @Basic
+    private String d;
+    @Basic
+    private int s;
+    @Basic
+    private int l;
+    @Basic
+    private int cid;
+    @Basic
+    private String su;
+    @Basic
+    private String fr;
+    @Basic
+    private String dine;
+    @Basic
+    private String tine;
+    @Basic
+    private String aine;
+    @Basic
+    private boolean ifSent;
 
-	
-    public m() 
-    {
+    @ManyToOne
+    @JoinColumn(name = "gid_zuser", nullable = false)
+    protected zuser zuserInstance;
+
+    public m() {
     }
-    
-	public zuser getUserInstance() {
-		return zuserInstance;
-	}
-	public void setUserInstance(zuser zuserInstance) {
-		this.zuserInstance = zuserInstance;
-	}
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getAine() {
+	return aine;
+    }
 
-	public String getF() {
-		return f;
-	}
+    public int getCid() {
+	return cid;
+    }
 
-	public void setF(String f) {
-		this.f = f;
-	}
+    public String getD() {
+	return d;
+    }
 
-	public int getRev() {
-		return rev;
-	}
+    public String getDine() {
+	return dine;
+    }
 
-	public void setRev(int rev) {
-		this.rev = rev;
-	}
+    public String getF() {
+	return f;
+    }
 
-	public String getD() {
-		return d;
-	}
+    public String getFr() {
+	return fr;
+    }
 
-	public void setD(String d) {
-		this.d = d;
-	}
+    public int getGid_m() {
+	return gid_m;
+    }
 
-	public int getS() {
-		return s;
-	}
+    public int getId() {
+	return id;
+    }
 
-	public void setS(int s) {
-		this.s = s;
-	}
+    public int getL() {
+	return l;
+    }
 
-	public int getL() {
-		return l;
-	}
+    public int getRev() {
+	return rev;
+    }
 
-	public void setL(int l) {
-		this.l = l;
-	}
+    public int getS() {
+	return s;
+    }
 
-	public int getCid() {
-		return cid;
-	}
+    public String getSu() {
+	return su;
+    }
 
-	public void setCid(int cid) {
-		this.cid = cid;
-	}
+    public String getTine() {
+	return tine;
+    }
 
-	public String getSu() {
-		return su;
-	}
+    public zuser getZuserInstance() {
+	return zuserInstance;
+    }
 
-	public void setSu(String su) {
-		this.su = su;
-	}
+    public boolean isIfSent() {
+	return ifSent;
+    }
 
-	public String getFr() {
-		return fr;
-	}
+    public void setAine(String aine) {
+	this.aine = aine;
+    }
 
-	public void setFr(String fr) {
-		this.fr = fr;
-	}
+    public void setCid(int cid) {
+	this.cid = cid;
+    }
 
-	public String getDine() {
-		return dine;
-	}
+    public void setD(String d) {
+	this.d = d;
+    }
 
-	public void setDine(String dine) {
-		this.dine = dine;
-	}
+    public void setDine(String dine) {
+	this.dine = dine;
+    }
 
-	public String getTine() {
-		return tine;
-	}
+    public void setF(String f) {
+	this.f = f;
+    }
 
-	public void setTine(String tine) {
-		this.tine = tine;
-	}
+    public void setFr(String fr) {
+	this.fr = fr;
+    }
 
-	public String getAine() {
-		return aine;
-	}
+    public void setGid_m(int gid_m) {
+	this.gid_m = gid_m;
+    }
 
-	public void setAine(String aine) {
-		this.aine = aine;
-	}
+    public void setId(int id) {
+	this.id = id;
+    }
 
+    public void setIfSent(boolean ifSent) {
+	this.ifSent = ifSent;
+    }
+
+    public void setL(int l) {
+	this.l = l;
+    }
+
+    public void setRev(int rev) {
+	this.rev = rev;
+    }
+
+    public void setS(int s) {
+	this.s = s;
+    }
+
+    public void setSu(String su) {
+	this.su = su;
+    }
+
+    public void setTine(String tine) {
+	this.tine = tine;
+    }
+
+    public void setZuserInstance(zuser zuserInstance) {
+	this.zuserInstance = zuserInstance;
+    }
 }
