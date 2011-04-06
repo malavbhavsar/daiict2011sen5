@@ -125,12 +125,15 @@ public class DBHandler extends HttpServlet {
 
     private ArrayList<String> tokenizeByComma(String s) {
 	ArrayList<String> coll = new ArrayList<String>();
-	StringTokenizer st = new StringTokenizer(s, ",");
-	while (st.hasMoreTokens()) {
-	    coll.add(st.nextToken());
-	}
-	for (int i = 0; i <= coll.size() - 1; i++) {
-	    System.out.println("--------" + coll.get(i));
+	if(s!=null)
+	{
+		StringTokenizer st = new StringTokenizer(s, ",");
+		while (st.hasMoreTokens()) {
+		    coll.add(st.nextToken());
+		}
+		for (int i = 0; i <= coll.size() - 1; i++) {
+		    System.out.println("--------" + coll.get(i));
+		}
 	}
 	return coll;
     }

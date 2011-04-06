@@ -56,48 +56,18 @@ public class InputFromRest implements Job {
     public InputFromRest() {
     }
 
-    /**
-     * @author malav To convert the InputStream to String we use the
-     *         Reader.read(char[] buffer) method. We iterate until the Reader
-     *         return -1 which means there's no more data to read. We use the
-     *         StringWriter class to produce the string.
-     */
-    public String convertStreamToString(InputStream is) throws IOException {
-	if (is != null) {
-	    Writer writer = new StringWriter();
-	    char[] buffer = new char[1024];
-	    try {
-		Reader reader = new BufferedReader(new InputStreamReader(is,
-			"UTF-8"));
-		int n;
-		while ((n = reader.read(buffer)) != -1) {
-		    writer.write(buffer, 0, n);
-		}
-		System.out.println("printing buffer: " + buffer);
-	    } finally {
-		is.close();
-	    }
-	    return writer.toString();
-	} else {
-	    System.out.println("It's null!");
-	    return "<items></items>";
-	}
-    }
-
     @Override
     public void execute(JobExecutionContext context)
 	    throws JobExecutionException {
 	// TODO Auto-generated method stub
+	System.out.println("---------Input from rest started---------");
 	errorFulUsers = new ArrayList<String>();
 	m_parser p1 = new m_parser();
 	try {
 	    em = EntityManagerofMPool.getEntityManagerofM();
 	    Query q = em.createNativeQuery("select gid_zuser from zuser");
 	    List l1 = q.getResultList();
-	    EntityTransaction prevTrans = null;
-	    System.out.println("Size of userlist is---->" + l1.size());
 	    for (int i = 0; i <= l1.size() - 1; i++) {
-		System.out.println("USER is ---->" + l1.get(i));
 		zuser z = em.find(zuser.class, l1.get(i));
 		if (z.isActive()) {
 		    p1.parse(getXMLStream(z), z, em);
@@ -114,6 +84,8 @@ public class InputFromRest implements Job {
 	} catch (Exception e) {
 	    log.info("--- Error in job2!");
 	}
+	System.out.println("---------Input from rest completed---------");
+
     }
 
     private String getXMLStream(zuser z) {
@@ -147,11 +119,35 @@ public class InputFromRest implements Job {
 	String s = "<items></items>";
 	try {
 	    s = new String(convertStreamToString(isr));
-	    System.out.println("the string -----" + s);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return s;
+    }
+    /**
+     * @author malav To convert the InputStream to String we use the
+     *         Reader.read(char[] buffer) method. We iterate until the Reader
+     *         return -1 which means there's no more data to read. We use the
+     *         StringWriter class to produce the string.
+     */
+    public String convertStreamToString(InputStream is) throws IOException {
+	if (is != null) {
+	    Writer writer = new StringWriter();
+	    char[] buffer = new char[1024];
+	    try {
+		Reader reader = new BufferedReader(new InputStreamReader(is,
+			"UTF-8"));
+		int n;
+		while ((n = reader.read(buffer)) != -1) {
+		    writer.write(buffer, 0, n);
+		}
+	    } finally {
+		is.close();
+	    }
+	    return writer.toString();
+	} else {
+	    return "<items></items>";
+	}
     }
 }
