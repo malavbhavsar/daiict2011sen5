@@ -93,6 +93,7 @@ public class Queueing implements Job {
 			    if (newContent.length() + content.length() > SMS_MAX_CHARS) {
 				SMS sms = new SMS(cuurentUserMobile, content);
 				MessageQueuePool.getLinkedqueue().add(sms);
+				content=newContent;
 			    } else {
 				content += newContent;
 			    }
@@ -106,8 +107,10 @@ public class Queueing implements Job {
 		    System.out.println("Here 6");
 		    String queryStatement2 = "update m set ifsent=1 where gid_zuser="
 			    + z.getGid_zuser() + " and ifsent=0";
+		    em.getTransaction().begin();
 		    Query q3=em.createNativeQuery(queryStatement2);
 		    q3.executeUpdate();	    
+		    em.getTransaction().commit();
 		}
 	    }
 	} catch (Exception e) {
