@@ -7,8 +7,8 @@
 <font size=5>USER REGISTRATION SUCCESSFUL!</font>
 </th>
 <tr bgcolor="#c8d8f8">
-<td valign=top> 
-<b>Username</b> 
+<td valign=top>
+<b>Username</b>
 <br>
 <jsp:getProperty name="formHandler" property="userName"/>
 </td>

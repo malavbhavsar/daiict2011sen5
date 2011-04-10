@@ -12,6 +12,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.zimbra.SMS.SMS;
+import com.zimbra.SMS.SMSSender;
 import com.zimbra.resource.EntityManagerofMPool;
 import com.zimbra.resource.MessageQueuePool;
 import com.zimbra.rest.m.m;
@@ -24,11 +25,11 @@ public class Queueing implements Job {
     private static final Logger log = Logger
 	    .getLogger(Queueing.class.getName());
 
-    private static final int SMS_MAX_CHARS = 160;
+    private static final int SMS_MAX_CHARS = 100;
 
-    private static final int MAXFROM = 20;
+    private static final int MAXFROM = 15;
 
-    private static final int MAXSUB = 40;
+    private static final int MAXSUB = 30;
 
     @Override
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
@@ -52,7 +53,7 @@ public class Queueing implements Job {
 		    System.out.println("Here 2");
 		    // TODO Try to do subject keywords filtering by SQL query
 		    String content = "";
-		    String cuurentUserMobile = "91" + z.getMobilePhoneNo();
+		    String cuurentUserMobile =  z.getMobilePhoneNo();
 		    
 		    //Building query 2
 		    String queryStatement = "select gid_m from m where gid_zuser="
@@ -65,6 +66,7 @@ public class Queueing implements Job {
 			queryStatement += " and aine!=" + "'" + l2.get(i2)
 				+ "'" + " and dine!=" + "'" + l2.get(i2) + "' ";
 		    }
+		    System.out.println("Query statement fired "+queryStatement);
 		    System.out.println("Here 2.3");
 		    Query q2 = em.createNativeQuery(queryStatement);
 		    List l3 = q2.getResultList();
@@ -88,8 +90,9 @@ public class Queueing implements Job {
 			}
 			System.out.println("Here 4");
 			if (allok = true) {
-			    String newContent = "From:" + reduceString(message.getDine(),MAXFROM)
-				    + " Sub:" + reduceString(message.getSu(),MAXSUB) + "\n";
+			    String newContent = "FROM " + reduceString(message.getDine(),MAXFROM).toLowerCase()
+				  + " " + "SUB " + reduceString(message.getSu(),MAXSUB).toLowerCase() + " ";
+			    System.out.println("NEW Content = " + newContent);
 			    if (newContent.length() + content.length() > SMS_MAX_CHARS) {
 				SMS sms = new SMS(cuurentUserMobile, content);
 				MessageQueuePool.getLinkedqueue().add(sms);
@@ -109,7 +112,8 @@ public class Queueing implements Job {
 			    + z.getGid_zuser() + " and ifsent=0";
 		    em.getTransaction().begin();
 		    Query q3=em.createNativeQuery(queryStatement2);
-		    q3.executeUpdate();	    
+		    q3.executeUpdate();
+		    em.flush();
 		    em.getTransaction().commit();
 		}
 	    }
@@ -122,14 +126,34 @@ public class Queueing implements Job {
     
     private String reduceString(String s,int maxSize)
     {
+	s = changeForSMS(s);
 	if(s.length()>=maxSize)
 	{
 	    s=s.substring(0, maxSize-3)+"...";
 	}
 	return s;
     }
+    
+    private String changeForSMS(String s)
+    {
+	String s1 = "";
+	if(s!=null)
+	{
+	    for(int i =0 ; i<=s.length()-1; i++)
+	    {
+		if(Character.isLetterOrDigit(s.charAt(i)) || s.charAt(i)==' ')
+		{
+		    s1+=s.charAt(i);
+		}
+	    }
+	}
+	if(s1==null || s1.equals(""))
+	{
+	    s1="nill";
+	}
+	return s1;
+    }
 
     public Queueing() {
     }
-
 }

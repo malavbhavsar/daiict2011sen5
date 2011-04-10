@@ -4,16 +4,14 @@ import java.util.*;
 
 public class FormBean {
     private String userName;
-
     private String mobileNo;
     private String password1;
     private String password2;
-    private String excludeSubject;
-    private String excludeUser;
     private Hashtable errors;
 
     public FormBean() {
 	userName = "";
+	mobileNo = "";
 	password1 = "";
 	password2 = "";
 	errors = new Hashtable();
@@ -58,22 +56,6 @@ public class FormBean {
 
     public void setUserName(String u) {
 	userName = u;
-    }
-
-    public String getExcludeSubject() {
-	return excludeSubject;
-    }
-
-    public void setExcludeSubject(String excludeSubject) {
-	this.excludeSubject = excludeSubject;
-    }
-
-    public String getExcludeUser() {
-	return excludeUser;
-    }
-
-    public void setExcludeUser(String excludeUser) {
-	this.excludeUser = excludeUser;
     }
 
     public boolean validate() {

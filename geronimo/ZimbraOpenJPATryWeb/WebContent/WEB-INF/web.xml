@@ -9,10 +9,26 @@
 		<servlet-name>DBHandler</servlet-name>
 		<url-pattern>/DBHandler</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ResendConfCode</servlet-name>
+		<servlet-class>com.zimbra.ui.ResendConfCode</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResendConfCode</servlet-name>
+		<url-pattern>/ResendConfCode</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckConfCode</servlet-name>
+		<servlet-class>com.zimbra.ui.CheckConfCode</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckConfCode</servlet-name>
+		<url-pattern>/CheckConfCode</url-pattern>
+	</servlet-mapping>
 	<listener>
      	<listener-class>com.zimbra.jobSchedule.SchedulingClass</listener-class>
 	</listener>
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>new_login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

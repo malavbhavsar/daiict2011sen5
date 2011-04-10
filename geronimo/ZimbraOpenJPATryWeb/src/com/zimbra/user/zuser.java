@@ -1,6 +1,7 @@
 package com.zimbra.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -9,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import org.apache.openjpa.persistence.InverseLogical;
 
 import com.zimbra.rest.m.m;
 
@@ -33,6 +33,10 @@ public class zuser implements java.io.Serializable {
     private ArrayList<String> excludeSubject;
     @Basic
     private String confirmationCode;
+    @Basic
+    private int confirmationCodeSentTimes;
+    @Basic
+    private Date fifthConfirmationCodeSentTime;
     @OneToMany(targetEntity = com.zimbra.rest.m.m.class, cascade = CascadeType.ALL, mappedBy = "zuserInstance")
     ArrayList<m> ms; /* (m)essage(s) */
     
@@ -96,7 +100,21 @@ public class zuser implements java.io.Serializable {
     public void setUsername(String username) {
 	this.username = username;
     }
+    public int getConfirmationCodeSentTimes() {
+        return confirmationCodeSentTimes;
+    }
 
+    public void setConfirmationCodeSentTimes(int confirmationCodeSentTimes) {
+        this.confirmationCodeSentTimes = confirmationCodeSentTimes;
+    }
+
+    public Date getFifthConfirmationCodeSentTime() {
+        return fifthConfirmationCodeSentTime;
+    }
+
+    public void setFifthConfirmationCodeSentTime(Date fifthConfirmationCodeSentTime) {
+        this.fifthConfirmationCodeSentTime = fifthConfirmationCodeSentTime;
+    }
     public ArrayList<String> getExcludeUser() {
 	return excludeUser;
     }

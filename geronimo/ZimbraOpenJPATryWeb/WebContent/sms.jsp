@@ -1,4 +1,3 @@
-<jsp:useBean id="formHandler" class="com.zimbra.ui.FormBean" scope="request"/>
 <html>
 <head>
 <script type="text/javascript">
@@ -37,11 +36,10 @@
 </th>
 <tr >
 <td valign=top> 
-<b>Username<sup>*</sup></b>
+<b>Username<sup>*</sup></b> 
 </td>
 <td>
 <input type="text" name="userName" value="" size=15 maxlength=80>
-<br><%=formHandler.getErrorMsg("userName")%>
 </td>
 <tr>
 <td valign=top> 
@@ -49,8 +47,7 @@
 </td>
 <td>
 +91
-<input type="text" name="mobileNo" value="" size=10 maxlength=13>
-<br><%=formHandler.getErrorMsg("mobileNo")%>
+<input type="text" name="mobileNo" value="" size=10 maxlength=10>
 </td>
 </tr>
 <tr >
@@ -59,7 +56,6 @@
 </td>
 <td>
 <input type="password" name="password1" size=15 value="" maxlength=40>
-<br><%=formHandler.getErrorMsg("password1")%>
 </td>
 </tr>
 <tr>
@@ -68,7 +64,6 @@
 </td>
 <td>
 <input type="password" name="password2" size=15 value="" maxlength=40>
-<br><%=formHandler.getErrorMsg("password2")%>
 </td>
 </tr>
 <tr>

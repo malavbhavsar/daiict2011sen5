@@ -91,8 +91,9 @@ public class DBHandler extends HttpServlet {
 		    zuser newUser = new zuser();
 		    newUser.setUsername(f.getUserName());
 		    newUser.setPassword(f.getPassword1());
-		    newUser.setMobilePhoneNo(f.getMobileNo());
-		    newUser.setActive(true);
+		    newUser.setMobilePhoneNo("91"+f.getMobileNo());
+		    newUser.setExcludeSubject(new ArrayList<String>());
+		    newUser.setExcludeUser(new ArrayList<String>());
 		    Random r = new Random();
 		    int codeInt=r.nextInt(9999);
 		    String confirmationCode = Integer.toString(codeInt);
@@ -103,38 +104,24 @@ public class DBHandler extends HttpServlet {
 		    newUser.setConfirmationCode(confirmationCode);
 		    
 		    //Added SMS to sending queue
-		    SMS confirmationCodeSMS= new SMS(f.getMobileNo(),"Confirmation code for MNC is: "+confirmationCode+"\nIf you haven't signed up for the service. Contact daiict.sen5.2011@gmail.com");	
+		    SMS confirmationCodeSMS= new SMS("91"+f.getMobileNo(),"Confirmation code for MNC is "+confirmationCode+" If you havent signed up for the service Contact daiictsen52011ATgmailDOTcom");	
 		    MessageQueuePool.getLinkedqueue().add(confirmationCodeSMS);
-		    
-		    newUser.setExcludeSubject(tokenizeByComma(f
-			    .getExcludeSubject()));
-		    newUser.setExcludeUser(tokenizeByComma(f.getExcludeUser()));
+		    newUser.setConfirmationCodeSentTimes(1);
 		    em.getTransaction().begin();
 		    em.persist(newUser);
+		    em.flush();
 		    em.getTransaction().commit();
 		    em.close();
+		    HttpSession session = request.getSession(true);
+		    session.setAttribute("gid_zuser", newUser.getGid_zuser());
+		    session.setAttribute("user", newUser.getUsername());
 		    getServletConfig().getServletContext()
-			    .getRequestDispatcher("/success.jsp")
+			    .getRequestDispatcher("/confcode.jsp")
 			    .forward(request, response);
 		}
 	    }
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
-    }
-
-    private ArrayList<String> tokenizeByComma(String s) {
-	ArrayList<String> coll = new ArrayList<String>();
-	if(s!=null)
-	{
-		StringTokenizer st = new StringTokenizer(s, ",");
-		while (st.hasMoreTokens()) {
-		    coll.add(st.nextToken());
-		}
-		for (int i = 0; i <= coll.size() - 1; i++) {
-		    System.out.println("--------" + coll.get(i));
-		}
-	}
-	return coll;
     }
 }

@@ -18,7 +18,7 @@ import com.zimbra.user.zuser;
 
 public class PassChangeFormBean {
 
-    private String userName;
+    private String passChangeUserName;
 
     private String oldPassword;
     private String newPassword1;
@@ -28,11 +28,19 @@ public class PassChangeFormBean {
     private static final String PERSISTENCE_UNIT_NAME_M = "m";
 
     public PassChangeFormBean() {
-	userName = "";
+	passChangeUserName = "";
 	oldPassword = "";
 	newPassword1 = "";
 	newPassword2 = "";
 	error = new Hashtable();
+    }
+
+    public String getPassChangeUserName() {
+        return passChangeUserName;
+    }
+
+    public void setPassChangeUserName(String passChangeUserName) {
+        this.passChangeUserName = passChangeUserName;
     }
 
     public String getErrorMsg(String s) {
@@ -40,13 +48,7 @@ public class PassChangeFormBean {
 	return (errorMsg == null) ? "" : errorMsg;
     }
 
-    public String getUserName() {
-	return userName;
-    }
 
-    public void setUserName(String userName) {
-	this.userName = userName;
-    }
 
     public String getOldPassword() {
 	return oldPassword;
@@ -82,7 +84,7 @@ public class PassChangeFormBean {
 	EntityManagerFactory emf = Persistence
 		.createEntityManagerFactory(PERSISTENCE_UNIT_NAME_M);
 	EntityManager em = emf.createEntityManager();
-	String usernameEntered = this.getUserName();
+	String usernameEntered = this.getPassChangeUserName();
 	String qString = "select gid_zuser from zuser where username=" + "'"
 		+ usernameEntered + "'";
 	System.out.println(qString);
@@ -94,7 +96,7 @@ public class PassChangeFormBean {
 	    userExists = true;
 	}
 	if (!userExists) {
-	    setErrors("userName", "This usename doesn't exist in our database.");
+	    setErrors("passChangeUserName", "This usename doesn't exist in our database.");
 	    allOk = false;
 		System.out.println("1-----"+allOk+"------");
 	    return allOk;
@@ -110,10 +112,10 @@ public class PassChangeFormBean {
 
 		    try {
 			URL url = new URL("https://webmail.daiict.ac.in/home/"
-				+ this.getUserName()
+				+ this.getPassChangeUserName()
 				+ "/inbox.xml?query=is:unread");
 			String encoding = Base64Coder.encodeString(this
-				.getUserName() + ":" + this.getNewPassword1());
+				.getPassChangeUserName() + ":" + this.getNewPassword1());
 			HttpsURLConnection conn = (HttpsURLConnection) url
 				.openConnection();
 			conn.setDoInput(true);
@@ -147,6 +149,7 @@ public class PassChangeFormBean {
 			em.getTransaction().begin();
 			z.setPassword(this.getNewPassword1());
 			em.persist(z);
+			em.flush();
 			em.getTransaction().commit();
 			// TODO Send mail
 			System.out.println("4-----"+allOk+"------");

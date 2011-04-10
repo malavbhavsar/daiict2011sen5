@@ -42,17 +42,22 @@ public class m_parser extends DefaultHandler implements java.io.Serializable {
 	    // DO NOTHING
 	} else if (STATUS == SU) {
 	    String temp = new String(ch, start, length);
+	    if(temp==null || temp.equals(""))
+	    {
+		temp="(no subject)";
+	    }
 	    current.setSu(temp);
 	} else if (STATUS == FR) {
 	    String temp = new String(ch, start, length);
+	    if(temp==null || temp.equals(""))
+	    {
+		temp="(no body)";
+	    }
 	    current.setFr(temp);
 	} else {
 	    // DO NOTHING
 	}
     }
-
-    // receive notification of the beginning of an element
-
     // receive notification of the end of an element
     @Override
     public void endElement(String uri, String name, String qName) {
@@ -71,6 +76,7 @@ public class m_parser extends DefaultHandler implements java.io.Serializable {
 		em.persist(current);
 		z.addM(current);
 		em.persist(z);
+		em.flush();
 		em.getTransaction().commit();
 	    }
 	    current = null;
@@ -106,7 +112,8 @@ public class m_parser extends DefaultHandler implements java.io.Serializable {
 	    e.printStackTrace();
 	}
     }
-
+    
+    // receive notification of the beginning of an element
     @Override
     public void startElement(String uri, String name, String qName,
 	    Attributes atts) {
