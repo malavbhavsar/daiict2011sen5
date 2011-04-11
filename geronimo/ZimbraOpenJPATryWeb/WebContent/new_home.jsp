@@ -111,16 +111,7 @@
 	
 	</head>
 		<body>
-			<table align="center">
-			<tr>
-			<td>
-				<img src="mnc1.jpg" align="left" height="100" width="240" alt="mnc" />
-				</td>
-				<td>
-  				<a href = "new_logout.jsp">Sign Out</a>
-  				</td>
-			</tr>
-			</table>		
+			<img src="mnc1.jpg" align="top" height="100" width="240" alt="mnc" />
 			<div id="done-nav" style="display:inline">
 				<ul>
 					<li><label title="home"  id="home-nav">Home</label></li>
@@ -129,10 +120,14 @@
             		<li><label title="aboutus"  id="aboutus-nav">About us</label></li>
 				</ul>
 			</div>
-			<div id="home" class="content-box" style="display:none">		
+			<div id="home" class="content-box" style="display:none">
+				<br></br>		
 				<% String url = request.getRequestURI(); 
 					%>		
-				Welcome <%= session.getAttribute("username") %> !			
+				Welcome <%= session.getAttribute("username") %> !
+				<br></br>
+					<a href = "new_logout.jsp">Sign Out</a>
+				<br></br>					
 			</div>
 			<div id="settings" class="content-box" >
 				Settings of <%= session.getAttribute("username") %> !				
@@ -241,8 +236,9 @@ Link for user manual <a href="usermanual.pdf">User manual</a>
 			</p>
 			<br><br>
 			<center>								
-				<img src="grouppic.jpg" /> 
-			</center>						
+				<img src="grouppic.jpg" width="440" height="240"/> 
+			</center>
+			<br><br>						
 		</div>
 	</body>
 </html>

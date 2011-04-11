@@ -14,9 +14,10 @@
   			alert("Please fill the complete information");
   			return false;
   		}
-		else if (x!=10)
+		else if (x.length!=10)
 		{
-			alert("Please enter a valid 10-digit mobile number")
+			alert("Please enter a valid 10-digit mobile number");
+			return false;
 		}
 		else if (y!=z)
 		{
@@ -41,7 +42,9 @@
 </td>
 <td>
 <input type="text" name="userName" value="" size=15 maxlength=80>
+<font size=2 color=red>
 <br><%=formHandler.getErrorMsg("userName")%>
+</font>
 </td>
 <tr>
 <td valign=top> 
@@ -50,7 +53,10 @@
 <td>
 +91
 <input type="text" name="mobileNo" value="" size=10 maxlength=13>
-<br><%=formHandler.getErrorMsg("mobileNo")%>
+<br>
+<font size=2 color=red>
+<%=formHandler.getErrorMsg("mobileNo")%>
+</font>
 </td>
 </tr>
 <tr >
@@ -59,7 +65,10 @@
 </td>
 <td>
 <input type="password" name="password1" size=15 value="" maxlength=40>
-<br><%=formHandler.getErrorMsg("password1")%>
+<br>
+<font size=2 color=red>
+<%=formHandler.getErrorMsg("password1")%>
+</font>
 </td>
 </tr>
 <tr>
@@ -68,7 +77,10 @@
 </td>
 <td>
 <input type="password" name="password2" size=15 value="" maxlength=40>
-<br><%=formHandler.getErrorMsg("password2")%>
+<br>
+<font size=2 color=red>
+<%=formHandler.getErrorMsg("password2")%>
+</font>
 </td>
 </tr>
 <tr>

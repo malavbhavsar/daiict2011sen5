@@ -38,7 +38,10 @@ Username <%=session.getAttribute("user") %>
 <tr>
 <td>
 <input type="text" name="confcode" value="" size=15 maxlength=80>
+<br>
+<font size=2 color=red>
 <%=confCodeFormHandler.getErrorMsg("confcode")%>
+</font>
 </td>
 </tr>
 <tr>

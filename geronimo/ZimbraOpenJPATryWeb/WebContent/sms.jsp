@@ -13,9 +13,10 @@
   			alert("Please fill the complete information");
   			return false;
   		}
-		else if (x!=10)
+		else if (x.length!=10)
 		{
-			alert("Please enter a valid 10-digit mobile number")
+			alert("Please enter a valid 10-digit mobile number");
+			return false;
 		}
 		else if (y!=z)
 		{

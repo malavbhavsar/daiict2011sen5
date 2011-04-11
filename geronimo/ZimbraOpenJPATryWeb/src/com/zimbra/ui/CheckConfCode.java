@@ -30,8 +30,8 @@ public class CheckConfCode extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
 	try {
-	    HttpSession session = request.getSession(true);
 	    ConfCodeBean f = (ConfCodeBean) request.getAttribute("confCodeFormHandler");
+	    HttpSession session = request.getSession(true);
 	    EntityManagerFactory emf = Persistence
 		    .createEntityManagerFactory(PERSISTENCE_UNIT_NAME_M);
 	    EntityManager em = emf.createEntityManager();

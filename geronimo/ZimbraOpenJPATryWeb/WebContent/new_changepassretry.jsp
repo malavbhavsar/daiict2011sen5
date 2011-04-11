@@ -120,7 +120,9 @@
 						<td valign=top> 
 							<input type="text" name="passChangeUserName" value="" size=15 maxlength=80 />
 							<br></br>
+							<font size=2 color=red>
 							<%=passChangeFormHandler.getErrorMsg("passChangeUserName")%>
+							</font>
 						</td>
 					</tr>
 					<tr>
@@ -129,8 +131,10 @@
 						</td>
 						<td valign=top> 
 							<input type="password" name="oldPassword" value="" size=15 maxlength=80 />
-							<br></br>
+							<br>
+							<font size=2 color=red>
 							<%=passChangeFormHandler.getErrorMsg("oldPassword")%>
+							</font>
 						</td>
 					</tr>
 						<tr>
@@ -140,7 +144,9 @@
 							<td valign=top> 
 								<input type="password" name="newPassword1" value="" size=15 maxlength=80 />
 								<br></br> 
-							<%=passChangeFormHandler.getErrorMsg("newPassword1")%>
+									<font size=2 color=red>
+									<%=passChangeFormHandler.getErrorMsg("newPassword1")%>
+									</font>
 							</td>
 						</tr>
 						<tr>
@@ -150,7 +156,9 @@
 							<td valign=top> 
 								<input type="password" name="newPassword2" value="" size=15 maxlength=80 />
 								<br></br>
+								<font size=2 color=red>
 							<%=passChangeFormHandler.getErrorMsg("newPassword2")%>
+								</font>
 							</td>
 						</tr>
 						<tr>

@@ -18,7 +18,7 @@
 <center>
 <table cellpadding=4 cellspacing=2 border=0>
 <th  colspan=2>
-<font size=5>User Registration</font>
+<font size=5>Unregister</font>
 <br>
 <font size=1><sup>*</sup> Required Fields</font>
 </th>

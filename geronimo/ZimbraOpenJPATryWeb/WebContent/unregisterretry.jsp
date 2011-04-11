@@ -19,7 +19,7 @@
 <center>
 <table cellpadding=4 cellspacing=2 border=0>
 <th  colspan=2>
-<font size=5>User Registration</font>
+<font size=5>Unregister</font>
 <br>
 <font size=1><sup>*</sup> Required Fields</font>
 </th>
@@ -29,7 +29,10 @@
 </td>
 <td>
 <input type="text" name="unregusername" value="" size=15 maxlength=80>
+<br>
+<font size=2 color=red>
 <%=unregFormHandler.getErrorMsg("unregusername")%>
+</font>
 </td>
 <tr >
 <td valign=top>
@@ -37,7 +40,10 @@
 </td>
 <td>
 <input type="password" name="unregpassword" size=15 value="" maxlength=40>
+<br>
+<font size=2 color=red>
 <%=unregFormHandler.getErrorMsg("unregpassword")%>
+</font>
 </td>
 </tr>
 <tr>

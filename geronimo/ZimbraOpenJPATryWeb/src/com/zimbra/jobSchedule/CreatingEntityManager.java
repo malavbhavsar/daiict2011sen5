@@ -18,10 +18,10 @@ public class CreatingEntityManager implements Job {
 	    throws JobExecutionException {
 	// TODO Auto-generated method stub
 	System.setProperty("javax.net.ssl.keyStore",
-		"/home/malav/Desktop/SEN_PROGRAMING_STUFF/jssecacerts");
+		"/home/Cert/jssecacerts");
 	System.setProperty("javax.net.ssl.keyStorePassword", "changeit");
 	System.setProperty("javax.net.ssl.trustStore",
-		"/home/malav/Desktop/SEN_PROGRAMING_STUFF/jssecacerts");
+		"/home/Cert/jssecacerts");
 	EntityManagerofMPool.create();
 	MessageQueuePool.create();
     }

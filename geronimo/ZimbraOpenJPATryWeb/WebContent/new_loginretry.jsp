@@ -71,7 +71,9 @@
                 			<td>
                 				<input name="myusername" size="32" />
                 				<br>
+                				<font size=2 color=red>
                 				<%=loginFormHandler.getErrorMsg("myusername")%>
+                				</font>
                 			</td>
                 		</tr>
                 		<tr>
@@ -81,7 +83,9 @@
                 			<td>
                 				<input name="mypassword" type="password" size="32" />
                 				<br>
+                				<font size=2 color=red>
                 				<%=loginFormHandler.getErrorMsg("mypassword")%>
+                				</font>
                 			</td>
                 		</tr>
 						<tr>
